@@ -35,3 +35,6 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew publishToMavenLocal
+
+      - name: list files
+        run: ls -la ~/.m2/com/github/alexey-lapin/eme-java

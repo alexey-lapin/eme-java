@@ -37,4 +37,4 @@ jobs:
         run: ./gradlew publishToMavenLocal
 
       - name: list files
-        run: ls -la ~/.m2/repository/com/github/alexey-lapin/eme-java
+        run: ls -la ~/.m2/repository/com/github/alexey-lapin/eme-java/0.1.0

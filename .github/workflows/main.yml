@@ -25,6 +25,9 @@ jobs:
 
       - name: Cache Gradle wrapper and dependencies
         uses: actions/cache@v2
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         with:
           path: |
             ~/.gradle/caches/

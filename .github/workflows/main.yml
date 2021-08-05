@@ -35,9 +35,8 @@ jobs:
 
       - name: Build with Gradle
         env:
+          OSSRH_USER: ${{ secrets.OSSRH_USER }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-        run: ./gradlew publishToMavenLocal
-
-      - name: list files
-        run: ls -la ~/.m2/repository/com/github/alexey-lapin/eme-java/0.1.0
+        run: ./gradlew publish

@@ -40,9 +40,7 @@ configure<PublishingExtension> {
 
 configure<SigningExtension> {
     val key = System.getenv("SIGNING_KEY") ?: return@configure
-    println(key.length)
     val password = System.getenv("SIGNING_PASSWORD") ?: return@configure
-    println(password.length)
     val publishing: PublishingExtension by project
 
     useInMemoryPgpKeys(key, password)

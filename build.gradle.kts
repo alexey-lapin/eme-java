@@ -24,6 +24,29 @@ configure<PublishingExtension> {
     publications {
         create<MavenPublication>("maven") {
             from(components.getByName("java"))
+            pom {
+                name.set("java-eme")
+                description.set("EME (Encrypt-Mix-Encrypt) wide-block encryption for Java")
+                url.set("https://github.com/alexey-lapin/eme-java")
+                licenses {
+                    license {
+                        name.set("MIT")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("alexey-lapin")
+                        name.set("Alexey Lapin")
+                        email.set("alexey-lapin@protonmail.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git@github.com:alexey-lapin/eme-java.git")
+                    developerConnection.set("scm:git:git@github.com:alexey-lapin/eme-java.git")
+                    url.set("https://github.com/alexey-lapin/eme-java")
+                }
+            }
         }
     }
     repositories {

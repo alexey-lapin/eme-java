@@ -1,4 +1,4 @@
-EME for Java
+EME for Java [![codecov](https://codecov.io/gh/alexey-lapin/eme-java/branch/master/graph/badge.svg?token=N4DYGSK1QZ)](https://codecov.io/gh/alexey-lapin/eme-java)
 ==========
 This is a port of [EME for Go](https://github.com/rfjakob/eme).
 
@@ -22,3 +22,15 @@ This is an implementation of EME in Java, complete with test vectors from IEEE
 and Halevi.
 
 It has no dependencies outside the standard library.
+
+### Usage
+```
+implementation("com.github.alexey-lapin:eme-java:0.1.1")
+```
+```xml
+<dependency>
+    <groupId>com.github.alexey-lapin</groupId>
+    <artifactId>eme-java</artifactId>
+    <version>0.1.1</version>
+</dependency>
+```

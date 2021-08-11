@@ -25,12 +25,12 @@ It has no dependencies outside the standard library.
 
 ### Usage
 ```
-implementation("com.github.alexey-lapin:eme-java:0.1.1")
+implementation("com.github.alexey-lapin:eme-java:0.1.2")
 ```
 ```xml
 <dependency>
     <groupId>com.github.alexey-lapin</groupId>
     <artifactId>eme-java</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
 </dependency>
 ```

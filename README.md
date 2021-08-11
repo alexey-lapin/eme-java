@@ -24,7 +24,7 @@ and Halevi.
 It has no dependencies outside the standard library.
 
 ### Usage
-```
+```kotlin
 implementation("com.github.alexey-lapin:eme-java:0.1.2")
 ```
 ```xml

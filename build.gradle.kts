@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    jacoco
     `maven-publish`
     signing
 }
@@ -72,4 +73,10 @@ configure<SigningExtension> {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+

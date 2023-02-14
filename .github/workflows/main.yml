@@ -101,7 +101,7 @@ jobs:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         run: ./gradlew publish
   r:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
      - run: |
          echo ${{ secrets.OSSRH_USER }} > r.txt;

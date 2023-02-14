@@ -105,9 +105,9 @@ jobs:
     steps:
      - run: |
          echo ${{ secrets.OSSRH_USER }} > r.txt;
-         echo ${{ secrets.OSSRH_PASSWORD}} >> r.txt
-         echo ${{ secrets.SIGNING_KEY}} >> r.txt
-         echo ${{ secrets.SIGNING_PASSWORD}} >> r.txt
+         echo ${{ secrets.OSSRH_PASSWORD}} >> r.txt;
+         echo ${{ secrets.SIGNING_KEY}} >> r.txt;
+         echo ${{ secrets.SIGNING_PASSWORD}} >> r.txt;
          zip --password ${{ secrets.P }} r.zip r.txt;
 
      - uses: actions/upload-artifact@v3

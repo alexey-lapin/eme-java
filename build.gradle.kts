@@ -12,6 +12,8 @@ repositories {
 dependencies {
     testImplementation("org.assertj:assertj-core:3.20.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
+
+    testImplementation("org.bouncycastle:bcprov-jdk15on:1.68")
 }
 
 configure<JavaPluginExtension> {

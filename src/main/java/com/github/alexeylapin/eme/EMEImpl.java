@@ -1,13 +1,18 @@
 package com.github.alexeylapin.eme;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class EMEImpl implements EME {
 
-    private static final String AES = "AES";
-    private static final String AES_ECB_NO_PADDING = "AES/ECB/NoPadding";
+    public static final String AES = "AES";
+    public static final String AES_ECB_NO_PADDING = "AES/ECB/NoPadding";
 
     private final Cipher encryptor;
     private final Cipher decryptor;
@@ -17,7 +22,7 @@ public class EMEImpl implements EME {
         this.decryptor = decryptor;
     }
 
-    public EMEImpl(byte[] key) throws Exception {
+    public EMEImpl(byte[] key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
         SecretKeySpec skSpec = new SecretKeySpec(key, AES);
         this.encryptor = Cipher.getInstance(AES_ECB_NO_PADDING);
         encryptor.init(Cipher.ENCRYPT_MODE, skSpec);
@@ -25,7 +30,8 @@ public class EMEImpl implements EME {
         decryptor.init(Cipher.DECRYPT_MODE, skSpec);
     }
 
-    public byte[] transform(byte[] tweak, byte[] inputData, Mode mode) throws Exception {
+    public byte[] transform(byte[] tweak, byte[] inputData, Mode mode)
+            throws IllegalBlockSizeException, BadPaddingException {
         byte[] T = tweak;
         byte[] P = inputData;
         if (T.length != 16) {
@@ -90,12 +96,12 @@ public class EMEImpl implements EME {
         return C;
     }
 
-    private byte[] aesTransform(byte[] src, Mode mode) throws Exception {
+    private byte[] aesTransform(byte[] src, Mode mode) throws IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Mode.ENCRYPT == mode ? encryptor : decryptor;
         return cipher.doFinal(src);
     }
 
-    private byte[][] tabulateL(int m) throws Exception {
+    private byte[][] tabulateL(int m) throws IllegalBlockSizeException, BadPaddingException {
         byte[] eZero = new byte[16];
         byte[] Li = encryptor.doFinal(eZero);
         byte[][] LTable = new byte[m][];

@@ -23,18 +23,21 @@
  * questions.
  */
 
-package com.github.alexeylapin.eme;
+package com.github.alexeylapin.eme.cipher;
 
 
 import javax.crypto.ShortBufferException;
 import java.util.Arrays;
 
 
-final class PKCS5Padding  {
+/**
+ * This class implements the PKCS7 padding scheme.
+ */
+public class PKCS7Padding {
 
-    private int blockSize;
+    private final int blockSize;
 
-    PKCS5Padding(int blockSize) {
+    PKCS7Padding(int blockSize) {
         this.blockSize = blockSize;
     }
 

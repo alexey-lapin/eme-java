@@ -27,7 +27,7 @@ jobs:
           java-version: ${{ matrix.java }}
 
       - name: Cache Gradle wrapper and dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches/
@@ -52,7 +52,7 @@ jobs:
           java-version: 8
 
       - name: Cache Gradle wrapper and dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches/
@@ -84,7 +84,7 @@ jobs:
           java-version: 8
 
       - name: Cache Gradle wrapper and dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches/

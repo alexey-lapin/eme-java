@@ -36,7 +36,7 @@ jobs:
         with:
           name: app-jar
           path: |
-            build/libs/eme-java*.jar
+            build/libs/eme-cipher*.jar
           retention-days: 7
 
   coverage:

@@ -4,4 +4,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "eme-java"
+rootProject.name = "eme-cipher"

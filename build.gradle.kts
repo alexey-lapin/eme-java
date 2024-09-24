@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.release)
 }
 
-group = "com.github.alexey-lapin"
+group = "com.github.alexey-lapin.eme-cipher"
 version = scmVersion.version
 description = "EME (Encrypt-Mix-Encrypt) wide-block encryption for Java"
 

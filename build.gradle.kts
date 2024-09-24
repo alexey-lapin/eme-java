@@ -12,6 +12,7 @@ repositories {
 dependencies {
     testImplementation("org.assertj:assertj-core:3.20.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.1")
 }
 
 configure<JavaPluginExtension> {

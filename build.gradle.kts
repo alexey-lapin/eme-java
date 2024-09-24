@@ -1,34 +1,49 @@
 plugins {
-    `java-library`
-    jacoco
-    `maven-publish`
-    signing
+    id("java-library")
+    id("jacoco")
+    id("maven-publish")
+    id("signing")
+    alias(libs.plugins.nexus)
+    alias(libs.plugins.release)
 }
 
-repositories {
-    mavenCentral()
+group = "com.github.alexey-lapin"
+version = scmVersion.version
+description = "EME (Encrypt-Mix-Encrypt) wide-block encryption for Java"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
+    withJavadocJar()
 }
 
 dependencies {
-    testImplementation("org.assertj:assertj-core:3.20.2")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.7.1")
+    testImplementation(libs.assertj)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.junit.jupiter.params)
 }
 
-configure<JavaPluginExtension> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-    withJavadocJar()
-    withSourcesJar()
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
 
-configure<PublishingExtension> {
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
+publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components.getByName("java"))
             pom {
-                name.set("java-eme")
-                description.set("EME (Encrypt-Mix-Encrypt) wide-block encryption for Java")
+                name.set(project.name)
+                description.set(provider { project.description })
                 url.set("https://github.com/alexey-lapin/eme-java")
                 licenses {
                     license {
@@ -51,37 +66,22 @@ configure<PublishingExtension> {
             }
         }
     }
+}
+
+nexusPublishing {
     repositories {
-        maven {
-            name = "OSSRH"
-            setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2")
-            credentials {
-                username = System.getenv("OSSRH_USER") ?: return@credentials
-                password = System.getenv("OSSRH_PASSWORD") ?: return@credentials
-            }
+        sonatype {
+            username.set(System.getenv("OSSRH_USER") ?: return@sonatype)
+            password.set(System.getenv("OSSRH_PASSWORD") ?: return@sonatype)
         }
     }
 }
 
-configure<SigningExtension> {
-    val key = System.getenv("SIGNING_KEY") ?: return@configure
-    val password = System.getenv("SIGNING_PASSWORD") ?: return@configure
+signing {
+    val key = System.getenv("SIGNING_KEY") ?: return@signing
+    val password = System.getenv("SIGNING_PASSWORD") ?: return@signing
     val publishing: PublishingExtension by project
 
     useInMemoryPgpKeys(key, password)
     sign(publishing.publications)
 }
-
-tasks.test {
-    useJUnitPlatform()
-    finalizedBy(tasks.jacocoTestReport)
-}
-
-tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-    reports {
-        xml.required.set(true)
-        html.required.set(true)
-    }
-}
-

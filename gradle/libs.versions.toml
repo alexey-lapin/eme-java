@@ -1,0 +1,11 @@
+[versions]
+junit-jupiter = "5.11.0"
+
+[libraries]
+assertj = { module = "org.assertj:assertj-core", version = "3.26.3" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit-jupiter" }
+
+[plugins]
+nexus = {id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0"}
+release = { id = "pl.allegro.tech.build.axion-release", version = "1.18.8" }

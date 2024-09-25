@@ -1,3 +1,6 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+import pl.allegro.tech.build.axion.release.domain.hooks.HookContext
+
 plugins {
     id("java-library")
     id("jacoco")
@@ -10,6 +13,13 @@ plugins {
 group = "com.github.alexey-lapin.eme-cipher"
 version = scmVersion.version
 description = "EME (Encrypt-Mix-Encrypt) wide-block encryption for Java"
+
+scmVersion {
+    hooks {
+        pre { c: HookContext -> c.addCommitPattern("README.md") }
+        pre("commit")
+    }
+}
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -84,4 +94,24 @@ signing {
 
     useInMemoryPgpKeys(key, password)
     sign(publishing.publications)
+}
+
+val releaseUpdatableFiles = listOf(
+    Pair("src/README.md", ".")
+)
+
+val updateReleaseDependentFiles by tasks.registering(Copy::class) {
+    releaseUpdatableFiles.forEach {
+        from(it.first) {
+            filter(ReplaceTokens::class, Pair("tokens", mapOf(Pair("version", version))))
+            into(it.second)
+        }
+    }
+    into(projectDir)
+    doNotTrackState("workaround")
+    mustRunAfter("verifyRelease")
+}
+
+tasks.named("createRelease").configure {
+    dependsOn(updateReleaseDependentFiles)
 }

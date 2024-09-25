@@ -28,13 +28,13 @@ Maven:
 <dependency>
     <groupId>com.github.alexey-lapin.eme-cipher</groupId>
     <artifactId>eme-cipher</artifactId>
-    <version>0.2.0</version>
+    <version>@version@</version>
 </dependency>
 ```
 
 Gradle:
 ```
-implementation("com.github.alexey-lapin.eme-cipher:eme-cipher:0.2.0")
+implementation("com.github.alexey-lapin.eme-cipher:eme-cipher:@version@")
 ```
 
 ### As a javax.crypto.Cipher

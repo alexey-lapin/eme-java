@@ -8,4 +8,4 @@ junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", vers
 
 [plugins]
 nexus = {id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0"}
-release = { id = "pl.allegro.tech.build.axion-release", version = "1.18.8" }
+release = { id = "pl.allegro.tech.build.axion-release", version = "1.18.9" }

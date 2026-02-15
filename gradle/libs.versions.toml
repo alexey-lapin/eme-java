@@ -1,5 +1,5 @@
 [versions]
-junit-jupiter = "5.11.3"
+junit-jupiter = "5.14.3"
 
 [libraries]
 assertj = { module = "org.assertj:assertj-core", version = "3.27.6" }
